@@ -15,16 +15,16 @@ const divide = (a, b) => { return a / b }
 
 const operate = (input1, input2, operator) => {
     switch (operator){
-    case 'add':
-        add(input1, input2)
+    case '+':
+        add((input1), input2)
         break;
-    case 'subtract':
+    case '-':
         subtract(input1, input2)
         break;
-    case 'multiply':
+    case 'x':
         multiply(input1, input2)
         break;
-    case 'add':
+    case '÷':
         multiply(input1, input2)
         break;
     }
@@ -43,9 +43,23 @@ operands.forEach(button => {
 });
 
 operators.forEach(button => {
-    button.addEventListener('click', () => {
-        if (!inOperation) {
+    button.addEventListener('click', (e) => {
+        console.log(e.target.textContent)
+        
+        if (!inOperation && firstInputNumber !== '') {
             inOperation = true;
+            operator = e.target.textContent
+        } else if (inOperation === true 
+            && firstInputNumber !== '' 
+            && secondInputNumber !== ''
+            && e.target.textContent === '=') {
+                display.textContent = add(Number(firstInputNumber), 
+                    Number(secondInputNumber))
+                operator = ''
+                firstInputNumber = ''
+                secondInputNumber = ''
+            inOperation = false;
         }
+        console.log(inOperation, operator)
     })
 })
