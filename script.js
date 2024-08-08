@@ -14,19 +14,18 @@ const multiply = (a, b) => { return a * b }
 const divide = (a, b) => { return a / b }
 
 const operate = (input1, input2, operator) => {
-    switch (operator){
-    case '+':
-        add((input1), input2)
-        break;
-    case '-':
-        subtract(input1, input2)
-        break;
-    case 'x':
-        multiply(input1, input2)
-        break;
-    case '÷':
-        multiply(input1, input2)
-        break;
+
+    if (operator === '+') {
+       return add(input1, input2)
+    } else if (operator === '-') {
+       return subtract(input1, input2)
+        
+    } else if (operator === 'x') {
+       return multiply(input1, input2)
+        
+    } else if (operator === '÷') {
+       return multiply(input1, input2)
+        
     }
 }
 
@@ -53,13 +52,12 @@ operators.forEach(button => {
             && firstInputNumber !== '' 
             && secondInputNumber !== ''
             && e.target.textContent === '=') {
-                display.textContent = add(Number(firstInputNumber), 
-                    Number(secondInputNumber))
+                display.textContent = operate(Number(firstInputNumber), 
+                    Number(secondInputNumber), operator)
                 operator = ''
                 firstInputNumber = ''
                 secondInputNumber = ''
             inOperation = false;
         }
-        console.log(inOperation, operator)
     })
 })
