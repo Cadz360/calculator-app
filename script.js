@@ -29,35 +29,35 @@ const operate = (input1, input2, operator) => {
     }
 }
 
-operands.forEach(button => {
-    button.addEventListener('click', () => {
-        if (!inOperation) {
-            firstInputNumber += button.textContent
-        display.textContent = firstInputNumber
-        } else {
-            secondInputNumber += button.textContent
-            display.textContent = secondInputNumber
-        }
-    })
-});
+// operands.forEach(button => {
+//     button.addEventListener('click', () => {
+//         if (!inOperation) {
+//             firstInputNumber += button.textContent
+//         display.textContent = firstInputNumber
+//         } else {
+//             secondInputNumber += button.textContent
+//             display.textContent = secondInputNumber
+//         }
+//     })
+// });
 
-operators.forEach(button => {
-    button.addEventListener('click', (e) => {
-        console.log(e.target.textContent)
+// operators.forEach(button => {
+//     button.addEventListener('click', (e) => {
+//         console.log(e.target.textContent)
         
-        if (!inOperation && firstInputNumber !== '') {
-            inOperation = true;
-            operator = e.target.textContent
-        } else if (inOperation === true 
-            && firstInputNumber !== '' 
-            && secondInputNumber !== ''
-            && e.target.textContent === '=') {
-                display.textContent = operate(Number(firstInputNumber), 
-                    Number(secondInputNumber), operator)
-                operator = ''
-                firstInputNumber = ''
-                secondInputNumber = ''
-            inOperation = false;
-        }
-    })
-})
+//         if (!inOperation && firstInputNumber !== '') {
+//             inOperation = true;
+//             operator = e.target.textContent
+//         } else if (inOperation === true 
+//             && firstInputNumber !== '' 
+//             && secondInputNumber !== ''
+//             && e.target.textContent === '=') {
+//                 display.textContent = operate(Number(firstInputNumber), 
+//                     Number(secondInputNumber), operator)
+//                 operator = ''
+//                 firstInputNumber = ''
+//                 secondInputNumber = ''
+//             inOperation = false;
+//         }
+//     })
+// })
