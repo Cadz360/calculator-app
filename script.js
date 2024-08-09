@@ -2,6 +2,8 @@ const operands = document.querySelectorAll('.operand')
 const operators = document.querySelectorAll('.operator')
 const display = document.querySelector('.display')
 const decimalPoint = document.querySelector('.decimal-point')
+const equalsBtn = document.querySelector('.equals')
+const allClearBtn = document.querySelector('.all-clear-btn')
 
 let firstInputNumber = '';
 let secondInputNumber = '';
@@ -17,6 +19,7 @@ const operate = (input1, input2, operator) => {
 
     if (operator === '+') {
        return add(input1, input2)
+       
     } else if (operator === '-') {
        return subtract(input1, input2)
         
@@ -24,40 +27,49 @@ const operate = (input1, input2, operator) => {
        return multiply(input1, input2)
         
     } else if (operator === '÷') {
-       return multiply(input1, input2)
+       return divide(input1, input2)
         
     }
 }
 
-// operands.forEach(button => {
-//     button.addEventListener('click', () => {
-//         if (!inOperation) {
-//             firstInputNumber += button.textContent
-//         display.textContent = firstInputNumber
-//         } else {
-//             secondInputNumber += button.textContent
-//             display.textContent = secondInputNumber
-//         }
-//     })
-// });
+operands.forEach(button => {
+    button.addEventListener('click', () => {
+        if (!inOperation) {
+            firstInputNumber += button.textContent
+        display.textContent = firstInputNumber
+        } else {
+            secondInputNumber += button.textContent
+            display.textContent = secondInputNumber
+        }
+    })
+});
 
-// operators.forEach(button => {
-//     button.addEventListener('click', (e) => {
-//         console.log(e.target.textContent)
-        
-//         if (!inOperation && firstInputNumber !== '') {
-//             inOperation = true;
-//             operator = e.target.textContent
-//         } else if (inOperation === true 
-//             && firstInputNumber !== '' 
-//             && secondInputNumber !== ''
-//             && e.target.textContent === '=') {
-//                 display.textContent = operate(Number(firstInputNumber), 
-//                     Number(secondInputNumber), operator)
-//                 operator = ''
-//                 firstInputNumber = ''
-//                 secondInputNumber = ''
-//             inOperation = false;
-//         }
-//     })
-// })
+operators.forEach(button => {
+    button.addEventListener('click', (e) => {
+        if (!inOperation && firstInputNumber !== '') {
+            inOperation = true;
+            operator = e.target.textContent
+        }  
+    })
+})
+
+equalsBtn.addEventListener('click', () => {
+   if (inOperation === true 
+      && firstInputNumber !== '' 
+      && secondInputNumber !== '') {
+          display.textContent = operate(Number(firstInputNumber), 
+              Number(secondInputNumber), operator)
+          operator = ''
+          firstInputNumber = ''
+          secondInputNumber = ''
+      inOperation = false;
+  }
+})
+
+allClearBtn.addEventListener('click', () => {
+   firstInputNumber = ''
+   display.textContent = firstInputNumber
+   secondInputNumber = ''
+   operator = ''
+   inOperation = false
+})
