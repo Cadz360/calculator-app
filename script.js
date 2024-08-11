@@ -49,7 +49,15 @@ operators.forEach(button => {
         if (!inOperation && firstInputNumber !== '') {
             inOperation = true;
             operator = e.target.textContent
-        }  
+        }  else if (firstInputNumber !== '' && secondInputNumber !== '') {
+            console.log(firstInputNumber, secondInputNumber)
+            display.textContent = operate(Number(firstInputNumber), 
+              Number(secondInputNumber), operator)
+            firstInputNumber = display.textContent
+            operator = e.target.textContent
+            secondInputNumber = ''
+            console.log(firstInputNumber, secondInputNumber)
+        }
     })
 })
 
