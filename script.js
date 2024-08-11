@@ -6,6 +6,7 @@ const equalsBtn = document.querySelector('.equals')
 const allClearBtn = document.querySelector('.all-clear-btn')
 const zeroBtn = document.querySelector('.zero')
 const plusNegativeBtn = document.querySelector('.plus-negative-btn')
+const percentBtn = document.querySelector('.percent-btn')
 
 let firstInputNumber = '';
 let secondInputNumber = '';
@@ -129,6 +130,16 @@ plusNegativeBtn.addEventListener('click', () => {
         display.textContent = firstInputNumber
     } else if (inOperation && firstInputNumber !== 0) {
         secondInputNumber = -secondInputNumber
+        display.textContent = secondInputNumber
+    }
+})
+
+percentBtn.addEventListener('click', () => {
+    if (!inOperation) {
+       firstInputNumber = firstInputNumber / 100
+       display.textContent = firstInputNumber
+    } else if (inOperation) {
+        secondInputNumber = secondInputNumber / 100
         display.textContent = secondInputNumber
     }
 })
