@@ -7,6 +7,7 @@ const allClearBtn = document.querySelector('.all-clear-btn')
 const zeroBtn = document.querySelector('.zero')
 const plusNegativeBtn = document.querySelector('.plus-negative-btn')
 const percentBtn = document.querySelector('.percent-btn')
+const backspaceBtn = document.querySelector('.backspace-btn')
 
 let firstInputNumber = '';
 let secondInputNumber = '';
@@ -56,11 +57,11 @@ operators.forEach(button => {
             hasDecimalPoint = false;
         }  else if (firstInputNumber !== '' && secondInputNumber !== '' && inOperation) {
             display.textContent = operate(Number(firstInputNumber), 
-              Number(secondInputNumber), operator)
-            firstInputNumber = display.textContent
-            operator = e.target.textContent
-            secondInputNumber = ''
-            console.log(firstInputNumber, secondInputNumber)
+              Number(secondInputNumber), operator);
+            firstInputNumber = display.textContent;
+            operator = e.target.textContent;
+            secondInputNumber = '';
+            hasDecimalPoint = false;
         }
     })
 })
@@ -142,4 +143,20 @@ percentBtn.addEventListener('click', () => {
         secondInputNumber = secondInputNumber / 100
         display.textContent = secondInputNumber
     }
+})
+
+backspaceBtn.addEventListener('click', () => {
+    if (!inOperation && firstInputNumber.length > 1) {
+        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
+        display.textContent = firstInputNumber
+     } else if (inOperation && secondInputNumber.length > 1) {
+        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
+         display.textContent = secondInputNumber
+     } else if (!inOperation && firstInputNumber.length === 1) {
+        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
+        display.textContent = '0'
+     } else if (inOperation && secondInputNumber.length === 1) {
+        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
+         display.textContent = '0'
+     }
 })
