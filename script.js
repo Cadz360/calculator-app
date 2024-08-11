@@ -4,6 +4,7 @@ const display = document.querySelector('.display')
 const decimalPoint = document.querySelector('.decimal-point')
 const equalsBtn = document.querySelector('.equals')
 const allClearBtn = document.querySelector('.all-clear-btn')
+const zeroBtn = document.querySelector('.zero')
 
 let firstInputNumber = '';
 let secondInputNumber = '';
@@ -97,8 +98,26 @@ decimalPoint.addEventListener('click', () => {
     } else if (!hasDecimalPoint && firstInputNumber.length > 0 && secondInputNumber === '') {
         firstInputNumber += '.'
         display.textContent = firstInputNumber;
+        hasDecimalPoint = true;
     } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber.length > 0 && inOperation) {
         secondInputNumber += '.'
+        display.textContent = secondInputNumber; 
+        hasDecimalPoint = true;
+    }
+})
+
+zeroBtn.addEventListener('click', () => {
+    if (hasDecimalPoint && !inOperation) {
+        firstInputNumber += '0'
+        display.textContent = firstInputNumber;
+    } else if (hasDecimalPoint && inOperation) {
+        secondInputNumber += '0'
+        display.textContent = secondInputNumber; 
+    } else if (!hasDecimalPoint && !inOperation && Number(firstInputNumber) !== 0 && firstInputNumber !== '') {
+        firstInputNumber += '0'
+        display.textContent = firstInputNumber;
+    } else if (!hasDecimalPoint && inOperation && Number(secondInputNumber) !== 0 && secondInputNumber !== '') {
+        secondInputNumber += '0'
         display.textContent = secondInputNumber; 
     }
 })
