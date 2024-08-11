@@ -79,7 +79,7 @@ equalsBtn.addEventListener('click', () => {
 
 allClearBtn.addEventListener('click', () => {
    firstInputNumber = '';
-   display.textContent = firstInputNumber;
+   display.textContent = '0';
    secondInputNumber = '';
    operator = '';
    inOperation = false;
