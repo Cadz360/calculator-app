@@ -5,6 +5,7 @@ const decimalPoint = document.querySelector('.decimal-point')
 const equalsBtn = document.querySelector('.equals')
 const allClearBtn = document.querySelector('.all-clear-btn')
 const zeroBtn = document.querySelector('.zero')
+const plusNegativeBtn = document.querySelector('.plus-negative-btn')
 
 let firstInputNumber = '';
 let secondInputNumber = '';
@@ -119,5 +120,15 @@ zeroBtn.addEventListener('click', () => {
     } else if (!hasDecimalPoint && inOperation && Number(secondInputNumber) !== 0 && secondInputNumber !== '') {
         secondInputNumber += '0'
         display.textContent = secondInputNumber; 
+    }
+})
+
+plusNegativeBtn.addEventListener('click', () => {
+    if (!inOperation && firstInputNumber !== 0) {
+        firstInputNumber = -firstInputNumber
+        display.textContent = firstInputNumber
+    } else if (inOperation && firstInputNumber !== 0) {
+        secondInputNumber = -secondInputNumber
+        display.textContent = secondInputNumber
     }
 })
