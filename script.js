@@ -9,6 +9,7 @@ let firstInputNumber = '';
 let secondInputNumber = '';
 let operator = '';
 let inOperation = false;
+let hasDecimalPoint = false;
 
 const add = (a, b) => { return a + b }
 const subtract = (a, b) => { return a - b }
@@ -49,8 +50,8 @@ operators.forEach(button => {
         if (!inOperation && firstInputNumber !== '') {
             inOperation = true;
             operator = e.target.textContent
-        }  else if (firstInputNumber !== '' && secondInputNumber !== '') {
-            console.log(firstInputNumber, secondInputNumber)
+            hasDecimalPoint = false;
+        }  else if (firstInputNumber !== '' && secondInputNumber !== '' && inOperation) {
             display.textContent = operate(Number(firstInputNumber), 
               Number(secondInputNumber), operator)
             firstInputNumber = display.textContent
@@ -71,13 +72,33 @@ equalsBtn.addEventListener('click', () => {
           firstInputNumber = ''
           secondInputNumber = ''
       inOperation = false;
+   hasDecimalPoint = false;
   }
 })
 
 allClearBtn.addEventListener('click', () => {
-   firstInputNumber = ''
-   display.textContent = firstInputNumber
-   secondInputNumber = ''
-   operator = ''
-   inOperation = false
+   firstInputNumber = '';
+   display.textContent = firstInputNumber;
+   secondInputNumber = '';
+   operator = '';
+   inOperation = false;
+   hasDecimalPoint = false;
+})
+
+decimalPoint.addEventListener('click', () => {
+    if(!hasDecimalPoint && firstInputNumber === '' && secondInputNumber === '') {
+        firstInputNumber = '0.';
+        display.textContent = firstInputNumber;
+        hasDecimalPoint = true;
+    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber === '' && inOperation) {
+        secondInputNumber = '0.'
+        display.textContent = secondInputNumber;
+        hasDecimalPoint = true;
+    } else if (!hasDecimalPoint && firstInputNumber.length > 0 && secondInputNumber === '') {
+        firstInputNumber += '.'
+        display.textContent = firstInputNumber;
+    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber.length > 0 && inOperation) {
+        secondInputNumber += '.'
+        display.textContent = secondInputNumber; 
+    }
 })
