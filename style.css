@@ -12,8 +12,8 @@
 }
 
 .calculator {
-    width:550px;
-    height: 650px;
+    width:450px;
+    height: 550px;
     padding: 10px;
     background-color: grey;
     border-radius: 50px;
@@ -38,7 +38,7 @@
     border-radius: 10px;
     margin: 20px;
     background-color: rgb(196, 196, 196);
-    height: 80%;
+    height: 70%;
     padding: 20px;
     display: flex;
     flex-direction: column;

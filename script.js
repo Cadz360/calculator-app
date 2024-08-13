@@ -40,6 +40,43 @@ const operate = (input1, input2, operator) => {
     }
 }
 
+const zeroBtnFunc = () => {
+        if (hasDecimalPoint && !inOperation) {
+            firstInputNumber += '0'
+            display.textContent = firstInputNumber;
+        } else if (hasDecimalPoint && inOperation) {
+            secondInputNumber += '0'
+            display.textContent = secondInputNumber; 
+        } else if (!inOperation && firstInputNumber !== '0') {
+            firstInputNumber += '0'
+            display.textContent = firstInputNumber;
+            console.log(firstInputNumber)
+        } else if (inOperation && secondInputNumber !== '0') {
+            secondInputNumber += '0'
+            display.textContent = secondInputNumber; 
+        }
+    }
+
+const decimalPointBtnFunc = () => {
+    if(!hasDecimalPoint && firstInputNumber === '' && secondInputNumber === '') {
+        firstInputNumber = '0.';
+        display.textContent = firstInputNumber;
+        hasDecimalPoint = true;
+    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber === '' && inOperation) {
+        secondInputNumber = '0.'
+        display.textContent = secondInputNumber;
+        hasDecimalPoint = true;
+    } else if (!hasDecimalPoint && firstInputNumber.length > 0 && secondInputNumber === '') {
+        firstInputNumber += '.'
+        display.textContent = firstInputNumber;
+        hasDecimalPoint = true;
+    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber.length > 0 && inOperation) {
+        secondInputNumber += '.'
+        display.textContent = secondInputNumber; 
+        hasDecimalPoint = true;
+    }
+}
+
 operands.forEach(button => {
     button.addEventListener('click', () => {
         if (!inOperation) {
@@ -57,6 +94,29 @@ operands.forEach(button => {
         }
     })
 });
+
+document.addEventListener('keydown', (e) => {
+    if (/[1-9]/g.test(e.key)) {
+        if (!inOperation) {
+            if (firstInputNumber === '0') {
+                firstInputNumber = ''
+            }
+            firstInputNumber += e.key
+        display.textContent = firstInputNumber
+        } else {
+            if (secondInputNumber === '0') {
+                secondInputNumber = ''
+            }
+            secondInputNumber += e.key
+            display.textContent = secondInputNumber
+        }
+    } else if (e.key === '0') {
+        zeroBtnFunc();
+    } else if (e.key === '.') {
+        decimalPointBtnFunc();
+    }
+    
+})
 
 operators.forEach(button => {
     button.addEventListener('click', (e) => {
@@ -98,42 +158,9 @@ allClearBtn.addEventListener('click', () => {
    hasDecimalPoint = false;
 })
 
-decimalPoint.addEventListener('click', () => {
-    if(!hasDecimalPoint && firstInputNumber === '' && secondInputNumber === '') {
-        firstInputNumber = '0.';
-        display.textContent = firstInputNumber;
-        hasDecimalPoint = true;
-    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber === '' && inOperation) {
-        secondInputNumber = '0.'
-        display.textContent = secondInputNumber;
-        hasDecimalPoint = true;
-    } else if (!hasDecimalPoint && firstInputNumber.length > 0 && secondInputNumber === '') {
-        firstInputNumber += '.'
-        display.textContent = firstInputNumber;
-        hasDecimalPoint = true;
-    } else if (!hasDecimalPoint && firstInputNumber !== '' && secondInputNumber.length > 0 && inOperation) {
-        secondInputNumber += '.'
-        display.textContent = secondInputNumber; 
-        hasDecimalPoint = true;
-    }
-})
+decimalPoint.addEventListener('click', decimalPointBtnFunc)
 
-zeroBtn.addEventListener('click', () => {
-    if (hasDecimalPoint && !inOperation) {
-        firstInputNumber += '0'
-        display.textContent = firstInputNumber;
-    } else if (hasDecimalPoint && inOperation) {
-        secondInputNumber += '0'
-        display.textContent = secondInputNumber; 
-    } else if (!inOperation && firstInputNumber !== '0') {
-        firstInputNumber += '0'
-        display.textContent = firstInputNumber;
-        console.log(firstInputNumber)
-    } else if (inOperation && secondInputNumber !== '0') {
-        secondInputNumber += '0'
-        display.textContent = secondInputNumber; 
-    }
-})
+zeroBtn.addEventListener('click', zeroBtnFunc)
 
 plusNegativeBtn.addEventListener('click', () => {
     if (!inOperation && firstInputNumber !== 0) {
@@ -170,12 +197,6 @@ backspaceBtn.addEventListener('click', () => {
          display.textContent = '0'
      }
 })
-
-
-// To fix: 
-// 1. Should be able to type 0 when there's nothing but can't add any more number
-// 2. When there's only 0, it should turn to any number pressed
-// 3. Give error message when user tries to divide a number by 0
 
 //Next tasks:
 // 1. Add Keyboard support
