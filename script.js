@@ -32,6 +32,9 @@ const operate = (input1, input2, operator) => {
        return multiply(input1, input2)
         
     } else if (operator === '÷') {
+        if (input2 === 0) {
+            return 'Error cannot divide by zero'
+        }
        return divide(input1, input2)
         
     }
@@ -40,9 +43,15 @@ const operate = (input1, input2, operator) => {
 operands.forEach(button => {
     button.addEventListener('click', () => {
         if (!inOperation) {
+            if (firstInputNumber === '0') {
+                firstInputNumber = ''
+            }
             firstInputNumber += button.textContent
         display.textContent = firstInputNumber
         } else {
+            if (secondInputNumber === '0') {
+                secondInputNumber = ''
+            }
             secondInputNumber += button.textContent
             display.textContent = secondInputNumber
         }
@@ -116,10 +125,11 @@ zeroBtn.addEventListener('click', () => {
     } else if (hasDecimalPoint && inOperation) {
         secondInputNumber += '0'
         display.textContent = secondInputNumber; 
-    } else if (!hasDecimalPoint && !inOperation && Number(firstInputNumber) !== 0 && firstInputNumber !== '') {
+    } else if (!inOperation && firstInputNumber !== '0') {
         firstInputNumber += '0'
         display.textContent = firstInputNumber;
-    } else if (!hasDecimalPoint && inOperation && Number(secondInputNumber) !== 0 && secondInputNumber !== '') {
+        console.log(firstInputNumber)
+    } else if (inOperation && secondInputNumber !== '0') {
         secondInputNumber += '0'
         display.textContent = secondInputNumber; 
     }
@@ -160,3 +170,13 @@ backspaceBtn.addEventListener('click', () => {
          display.textContent = '0'
      }
 })
+
+
+// To fix: 
+// 1. Should be able to type 0 when there's nothing but can't add any more number
+// 2. When there's only 0, it should turn to any number pressed
+// 3. Give error message when user tries to divide a number by 0
+
+//Next tasks:
+// 1. Add Keyboard support
+// 2. Add style 
