@@ -77,6 +77,22 @@ const decimalPointBtnFunc = () => {
     }
 }
 
+const backspaceBtnFunc = () => {
+    if (!inOperation && firstInputNumber.length > 1) {
+        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
+        display.textContent = firstInputNumber
+     } else if (inOperation && secondInputNumber.length > 1) {
+        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
+         display.textContent = secondInputNumber
+     } else if (!inOperation && firstInputNumber.length === 1) {
+        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
+        display.textContent = '0'
+     } else if (inOperation && secondInputNumber.length === 1) {
+        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
+         display.textContent = '0'
+     }
+}
+
 operands.forEach(button => {
     button.addEventListener('click', () => {
         if (!inOperation) {
@@ -114,6 +130,8 @@ document.addEventListener('keydown', (e) => {
         zeroBtnFunc();
     } else if (e.key === '.') {
         decimalPointBtnFunc();
+    } else if (e.key === 'Backspace') {
+        backspaceBtnFunc();
     }
     
 })
@@ -182,22 +200,4 @@ percentBtn.addEventListener('click', () => {
     }
 })
 
-backspaceBtn.addEventListener('click', () => {
-    if (!inOperation && firstInputNumber.length > 1) {
-        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
-        display.textContent = firstInputNumber
-     } else if (inOperation && secondInputNumber.length > 1) {
-        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
-         display.textContent = secondInputNumber
-     } else if (!inOperation && firstInputNumber.length === 1) {
-        firstInputNumber = firstInputNumber.substring(0, firstInputNumber.length - 1)
-        display.textContent = '0'
-     } else if (inOperation && secondInputNumber.length === 1) {
-        secondInputNumber = secondInputNumber.substring(0, secondInputNumber.length - 1)
-         display.textContent = '0'
-     }
-})
-
-//Next tasks:
-// 1. Add Keyboard support
-// 2. Add style 
+backspaceBtn.addEventListener('click', backspaceBtnFunc)

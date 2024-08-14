@@ -15,7 +15,7 @@
     width:450px;
     height: 550px;
     padding: 10px;
-    background-color: grey;
+    background-color: rgb(58, 58, 58);
     border-radius: 50px;
     display: flex;
     flex-direction: column;
@@ -24,14 +24,14 @@
 .display {
     height: 90px;
     border-radius: 10px;
-    font-size: 40px;
+    font-size: 42px;
     padding: 10px 15px;
     margin: 20px;
     background-color: rgb(196, 196, 196);
     display: flex;
     justify-content: flex-end;
     align-items: center;
-
+    font-weight: 500;
 }
 
 .keypad {
@@ -55,4 +55,46 @@ button {
     flex:1;
     font-size: 30px;
     border-radius: 20px;
+    color: white;
+    background-color: gray;
+    border-width: 0;
+}
+
+.all-clear-btn, .backspace-btn {
+    background-color: rgb(255, 105, 19);
+}
+
+.operator, .equals {
+    background-color: orange;
+}
+
+button:hover {
+    background-color: rgba(128, 128, 128, 0.808);
+
+}
+
+button:active {
+    background-color: rgba(128, 128, 128, 0.608);
+
+}
+
+.operator:hover, .equals:hover {
+    background-color: rgba(255, 166, 0, 0.808);
+}
+
+.operator:active, .equals:active {
+    background-color: rgba(255, 166, 0, 0.608);
+}
+
+
+.all-clear-btn:hover, .backspace-btn:hover {
+    background-color: rgba(255, 106, 19, 0.808);
+}
+
+.all-clear-btn:hover, .backspace-btn:hover {
+    background-color: rgba(255, 106, 19, 0.608);
+}
+
+button:active {
+    color: rgba(255, 255, 255, 0.689);
 }
